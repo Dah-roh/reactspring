@@ -5,7 +5,7 @@ import React, {useState, useEffect}  from "react";
 const Products = () => {
     const [products, setProducts] = useState({});
    async function fetchData() {
-       const res = await fetch("http://localhost:8083/api/v1/view");
+       const res = await fetch("http://localhost:8083/api/v1/1");
        const data = await res.json()
       setProducts(data);
       
@@ -29,10 +29,10 @@ const Products = () => {
                 <tbody>
                     
                     <tr key ={1}>
-                    <td>{JSON.stringify(products[0])}</td>
-                <td>{JSON.stringify(products)}</td>
-                <td>12</td>
-                <td>5</td>
+                    <td>{Object.values(products)[0]}</td>
+                <td>{Object.values(products)[1]}</td>
+                <td>{Object.values(products)[2]}</td>
+                <td>{Object.values(products)[3]}</td>
                 </tr>
                 </tbody>
             
