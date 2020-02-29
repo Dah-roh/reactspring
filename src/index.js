@@ -3,9 +3,9 @@ import './index.css';
 import React, {useState, useEffect}  from "react";
 
 const Products = () => {
-    const [products, setProducts] = useState({});
+    const [products, setProducts] = useState([]);
    async function fetchData() {
-       const res = await fetch("http://localhost:8083/api/v1/1");
+       const res = await fetch("http://localhost:8083/api/v1/view");
        const data = await res.json()
       setProducts(data);
       
@@ -14,7 +14,8 @@ const Products = () => {
    useEffect(() => {
    fetchData()
 }, []);
-
+const { productDetails } = products;
+console.log(productDetails);
     return (<div className = "container">
         <h3 align = "center"> All Products</h3>
         <div className = "table" align = "center" >
@@ -27,13 +28,16 @@ const Products = () => {
                 </tr>
                 </thead>
                 <tbody>
-                    
-                    <tr key ={1}>
-                    <td>{Object.values(products)[0]}</td>
-                <td>{Object.values(products)[1]}</td>
-                <td>{Object.values(products)[2]}</td>
-                <td>{Object.values(products)[3]}</td>
+
+                    {products && products.map((products, index ) => (                    
+                   
+                   <tr key ={index}>
+                    <td>{JSON.stringify(products.id)}</td>
+                <td>{JSON.stringify(products.description).replace(/\"/g, "")}</td>
+                <td>{JSON.stringify(products.available)}</td>
+                    <td>{JSON.stringify(products.sold)}</td>
                 </tr>
+                ))}
                 </tbody>
             
         </div>
